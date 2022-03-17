@@ -1,1 +1,1 @@
-# Vladvlad9-assessment-of-the-effectiveness-of-the-use-of-the-radio-frequency-spectrum
+ОЦЕНКИ ЭФФЕКТИВНОСТИ ИСПОЛЬЗОВАНИЯ РАДИОЧАСТОТНОГО СПЕКТРА
