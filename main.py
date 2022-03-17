@@ -2,9 +2,9 @@ import sys
 from PyQt5 import QtWidgets
 
 from FormsPy.Form1 import Ui_MainWindow
-from Form2 import Ui_EconomicEfficiencyWindow
-from Form3 import Ui_Technical_efficiencyWindow
-from Form4 import Ui_Social_Efficiency_Window
+from FormsPy.Form2 import Ui_EconomicEfficiencyWindow
+from FormsPy.Form3 import Ui_Technical_efficiencyWindow
+from FormsPy.Form4 import Ui_Social_Efficiency_Window
 
 app = QtWidgets.QApplication(sys.argv)
 Dialog = QtWidgets.QDialog()
