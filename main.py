@@ -1,7 +1,7 @@
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 
-from Form1 import Ui_MainWindow
+from FormsPy.Form1 import Ui_MainWindow
 from Form2 import Ui_EconomicEfficiencyWindow
 from Form3 import Ui_Technical_efficiencyWindow
 from Form4 import Ui_Social_Efficiency_Window
