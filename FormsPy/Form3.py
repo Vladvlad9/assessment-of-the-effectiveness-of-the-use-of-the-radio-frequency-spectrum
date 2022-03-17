@@ -9,9 +9,29 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from db import DBApi
 
 
 class Ui_Technical_efficiencyWindow(object):
+
+    def select_value(self):
+        db = DBApi()
+        result = db.technical_efficiency()
+
+        self.lineEdit_5.setText(str(result[0][2]))
+
+        Spok = self.lineEdit_5.text()
+        SRB = self.lineEdit_3.text()
+
+        if Spok != '' and SRB != '':
+            result_value = int(Spok) / int(SRB)
+            self.label.setText(f'C = {str(result_value)}')
+            db.select_basic_formula(C1=str(result_value))
+
+    def ResultButton_click(self):
+        self.ResultButton.clicked.connect(lambda: self.select_value)
+
+
     def setupUi(self, Technical_efficiencyWindow):
         Technical_efficiencyWindow.setObjectName("Technical_efficiencyWindow")
         Technical_efficiencyWindow.resize(672, 522)
@@ -38,13 +58,15 @@ class Ui_Technical_efficiencyWindow(object):
         self.lineEdit_5 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_5.setGeometry(QtCore.QRect(160, 220, 261, 20))
         self.lineEdit_5.setObjectName("lineEdit_5")
-        self.buttonBox = QtWidgets.QDialogButtonBox(self.centralwidget)
-        self.buttonBox.setGeometry(QtCore.QRect(210, 430, 156, 23))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName("buttonBox")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(160, 200, 271, 16))
         self.label_5.setObjectName("label_5")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(120, 330, 47, 13))
+        self.label.setObjectName("label")
+        self.ResultButton = QtWidgets.QPushButton(self.centralwidget)
+        self.ResultButton.setGeometry(QtCore.QRect(230, 390, 75, 51))
+        self.ResultButton.setObjectName("ResultButton")
         Technical_efficiencyWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Technical_efficiencyWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 672, 21))
@@ -57,6 +79,8 @@ class Ui_Technical_efficiencyWindow(object):
         self.retranslateUi(Technical_efficiencyWindow)
         QtCore.QMetaObject.connectSlotsByName(Technical_efficiencyWindow)
 
+        self.ResultButton.clicked.connect(self.select_value)
+
     def retranslateUi(self, Technical_efficiencyWindow):
         _translate = QtCore.QCoreApplication.translate
         Technical_efficiencyWindow.setWindowTitle(_translate("Technical_efficiencyWindow", "Техническая эффективность"))
@@ -65,6 +89,7 @@ class Ui_Technical_efficiencyWindow(object):
         self.label_4.setText(_translate("Technical_efficiencyWindow", "S покрытия  ="))
         self.label_7.setText(_translate("Technical_efficiencyWindow", "SРБ ="))
         self.label_5.setText(_translate("Technical_efficiencyWindow", "_"))
+        self.label.setText(_translate("Technical_efficiencyWindow", "TextLabel"))
+        self.ResultButton.setText(_translate("Technical_efficiencyWindow", "Результат"))
 
-
-
+        self.ResultButton.clicked.connect(self.select_value)
