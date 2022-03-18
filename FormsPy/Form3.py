@@ -9,27 +9,30 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox, QWidget
+
+from FormsPy.Form1 import Ui_MainWindow
 from db import DBApi
 
 
 class Ui_Technical_efficiencyWindow(object):
 
-    def select_value(self):
+    def show_value(self):
         db = DBApi()
         result = db.technical_efficiency()
-
         self.lineEdit_5.setText(str(result[0][2]))
 
-        Spok = self.lineEdit_5.text()
-        SRB = self.lineEdit_3.text()
+    def select_value(self):
+        db = DBApi()
+        self.Spok = self.lineEdit_5.text()
+        self.SRB = self.lineEdit_3.text()
 
-        if Spok != '' and SRB != '':
-            result_value = int(Spok) / int(SRB)
+        if self.Spok != '' and self.SRB != '':
+            result_value = int(self.Spok) / int(self.SRB)
             self.label.setText(f'C = {str(result_value)}')
-            db.select_basic_formula(C1=str(result_value))
+            #db.insert_basic_formula(C1=str(result_value))
+            db.add_basic_formula('C1', str(result_value))
 
-    def ResultButton_click(self):
-        self.ResultButton.clicked.connect(lambda: self.select_value)
 
 
     def setupUi(self, Technical_efficiencyWindow):
@@ -80,6 +83,7 @@ class Ui_Technical_efficiencyWindow(object):
         QtCore.QMetaObject.connectSlotsByName(Technical_efficiencyWindow)
 
         self.ResultButton.clicked.connect(self.select_value)
+        self.show_value()
 
     def retranslateUi(self, Technical_efficiencyWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -93,3 +97,7 @@ class Ui_Technical_efficiencyWindow(object):
         self.ResultButton.setText(_translate("Technical_efficiencyWindow", "Результат"))
 
         self.ResultButton.clicked.connect(self.select_value)
+
+    def ResultButton_click(self):
+        self.ResultButton.clicked.connect(lambda: self.select_value)
+        print('butt')
